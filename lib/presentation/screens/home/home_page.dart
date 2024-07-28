@@ -30,6 +30,22 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         backgroundColor: MyColor.primarycolor,
         title: const Text("Weather App"),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: InkWell(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const SplashScreen(),
+                ));
+              },
+              child: const Icon(
+                Icons.help,
+                color: Colors.white,
+              ),
+            ),
+          )
+        ],
       ),
       body: Column(
         children: [

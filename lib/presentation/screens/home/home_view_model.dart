@@ -17,10 +17,11 @@ class HomeViewModel {
         final position = await determinePosition();
         data = await repository.weatherrepo.getWeatherDataByCoords(
             latitude: position.latitude, longitude: position.longitude);
+        weatherbloc.onUpdateData(data);
       } else {
         data = await repository.weatherrepo.getWeatherData(country: country);
+        weatherbloc.onUpdateData(data);
       }
-      weatherbloc.onUpdateData(data);
     } catch (e) {
       weatherbloc.onFailedResponse(error: e.toString());
     }
@@ -48,6 +49,7 @@ class HomeViewModel {
           'Location permissions are permanently denied, we cannot request permissions.');
     }
 
-    return await Geolocator.getCurrentPosition();
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
   }
 }
