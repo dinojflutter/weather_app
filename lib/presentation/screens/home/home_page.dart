@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber[100],
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: MyColor.primarycolor,
@@ -104,7 +105,8 @@ class _HomePageState extends State<HomePage> {
                       fontWeight: FontWeight.normal,
                     ),
                     Image.network(
-                        'https:${state.data!.current.condition.icon}'),
+                      'https:${state.data!.current.condition.icon}',
+                    ),
                   ],
                 );
               } else if (state is VelocityFailedState) {

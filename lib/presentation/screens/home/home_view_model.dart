@@ -23,7 +23,8 @@ class HomeViewModel {
         weatherbloc.onUpdateData(data);
       }
     } catch (e) {
-      weatherbloc.onFailedResponse(error: e.toString());
+      weatherbloc.onFailedResponse(
+          error: "Please enter the correct country Name");
     }
   }
 
