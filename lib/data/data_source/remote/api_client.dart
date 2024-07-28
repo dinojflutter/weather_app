@@ -3,16 +3,23 @@ import 'package:weather_app/data/data_source/remote/api_constant.dart';
 import 'package:weather_app/data/data_source/remote/api_exception.dart';
 
 class ApiClient {
-  final Dio dio = Dio();
+  late Dio dio;
+  late BaseOptions baseOptions;
 
-  Future<Response> getrequest() async {
+  ApiClient() {
+    baseOptions =
+        BaseOptions(baseUrl: ApiConstant.mainurl); // Initialize baseOptions
+    dio = Dio(baseOptions);
+  }
+
+  Options options = Options();
+
+  Future<Response> getrequest({required String path}) async {
     try {
-      var response = await dio.get(ApiConstant.mainurl);
-      print(response);
+      var response = await dio.get(path);
       return response;
     } on DioException catch (e) {
       if (e.response != null) {
-        print("Error with response");
         throw ApiException(message: e.response!.statusCode);
       } else {
         throw Exception(e.message);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/constant/my_color.dart';
-import 'package:weather_app/presentation/screens/home/home_import.dart';
+
+import 'home/home_import.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

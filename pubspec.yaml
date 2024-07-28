@@ -38,6 +38,8 @@ dependencies:
   bloc: ^8.1.4
   flutter_bloc: ^8.1.6
   velocity_bloc: ^1.2.0
+  geolocator: ^12.0.0
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:

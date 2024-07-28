@@ -35,13 +35,22 @@ class _HomePageState extends State<HomePage> {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              controller: homeviewmodel._controller,
-              decoration: InputDecoration(
-                hintText: "Enter Country",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(18),
+            child: Form(
+              key: homeviewmodel._formkey,
+              child: TextFormField(
+                controller: homeviewmodel._controller,
+                decoration: InputDecoration(
+                  hintText: "Enter Country",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(18),
+                  ),
                 ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Enter country Name";
+                  }
+                  return null;
+                },
               ),
             ),
           ),
@@ -51,9 +60,7 @@ class _HomePageState extends State<HomePage> {
             },
             child: const Text("Save Country"),
           ),
-          const SizedBox(
-            height: 50,
-          ),
+          const SizedBox(height: 50),
           BlocBuilder<VelocityBloc<WeatherModel?>,
               VelocityState<WeatherModel?>>(
             bloc: homeviewmodel.weatherbloc,
@@ -71,50 +78,29 @@ class _HomePageState extends State<HomePage> {
                       fontWeight: FontWeight.bold,
                     ),
                     MainText(
-                        text: "Temperature: ${state.data!.current.tempC} °C '",
-                        fontSize: 18,
-                        fontWeight: FontWeight.normal),
+                      text: "Temperature: ${state.data!.current.tempC} °C",
+                      fontSize: 18,
+                      fontWeight: FontWeight.normal,
+                    ),
                     MainText(
-                        text:
-                            'Condition: ${state.data!.current.condition.text}',
-                        fontSize: 18,
-                        fontWeight: FontWeight.normal),
+                      text: 'Condition: ${state.data!.current.condition.text}',
+                      fontSize: 18,
+                      fontWeight: FontWeight.normal,
+                    ),
                     Image.network(
                         'https:${state.data!.current.condition.icon}'),
                   ],
                 );
               } else if (state is VelocityFailedState) {
                 return Center(
-                  child: Text('Error: ${state.error}'),
+                  child: Text(state.error,
+                      style: const TextStyle(color: Colors.red, fontSize: 18)),
                 );
               }
               return const SizedBox();
             },
           ),
         ],
-      ),
-    );
-  }
-}
-
-class MainText extends StatelessWidget {
-  final String text;
-  final double fontSize;
-  final FontWeight fontWeight;
-  const MainText({
-    super.key,
-    required this.text,
-    required this.fontSize,
-    required this.fontWeight,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: fontSize,
-        fontWeight: fontWeight,
       ),
     );
   }
