@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/constant/my_color.dart';
-import 'package:weather_app/presentation/screens/home/home_page.dart';
+import 'package:weather_app/presentation/screens/home/home_import.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,10 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Future.delayed(const Duration(seconds: 5), () {
       Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const HomePage(),
-          ));
+          context, MaterialPageRoute(builder: (context) => const HomePage()));
     });
     super.initState();
   }
