@@ -51,6 +51,9 @@ class _HomePageState extends State<HomePage> {
             },
             child: const Text("Save Country"),
           ),
+          const SizedBox(
+            height: 50,
+          ),
           BlocBuilder<VelocityBloc<WeatherModel?>,
               VelocityState<WeatherModel?>>(
             bloc: homeviewmodel.weatherbloc,
@@ -62,8 +65,20 @@ class _HomePageState extends State<HomePage> {
               } else if (state is VelocityUpdateState) {
                 return Column(
                   children: [
-                    Text('Temperature: ${state.data!.current.tempC} °C'),
-                    Text('Condition: ${state.data!.current.condition.text}'),
+                    MainText(
+                      text: "Location: ${state.data!.location.country}",
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    MainText(
+                        text: "Temperature: ${state.data!.current.tempC} °C '",
+                        fontSize: 18,
+                        fontWeight: FontWeight.normal),
+                    MainText(
+                        text:
+                            'Condition: ${state.data!.current.condition.text}',
+                        fontSize: 18,
+                        fontWeight: FontWeight.normal),
                     Image.network(
                         'https:${state.data!.current.condition.icon}'),
                   ],
@@ -77,6 +92,29 @@ class _HomePageState extends State<HomePage> {
             },
           ),
         ],
+      ),
+    );
+  }
+}
+
+class MainText extends StatelessWidget {
+  final String text;
+  final double fontSize;
+  final FontWeight fontWeight;
+  const MainText({
+    super.key,
+    required this.text,
+    required this.fontSize,
+    required this.fontWeight,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: fontSize,
+        fontWeight: fontWeight,
       ),
     );
   }

@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final weatherModel = weatherModelFromJson(jsonString);
-
 import 'dart:convert';
 
 WeatherModel weatherModelFromJson(String str) =>
@@ -40,10 +36,10 @@ class Current {
   double windKph;
   int windDegree;
   String windDir;
-  int pressureMb;
+  double pressureMb;
   double pressureIn;
-  int precipMm;
-  int precipIn;
+  double precipMm;
+  double precipIn;
   int humidity;
   int cloud;
   double feelslikeC;
@@ -54,8 +50,8 @@ class Current {
   double heatindexF;
   double dewpointC;
   double dewpointF;
-  int visKm;
-  int visMiles;
+  double visKm;
+  double visMiles;
   int uv;
   double gustMph;
   double gustKph;
@@ -95,33 +91,33 @@ class Current {
   factory Current.fromJson(Map<String, dynamic> json) => Current(
         lastUpdatedEpoch: json["last_updated_epoch"],
         lastUpdated: json["last_updated"],
-        tempC: json["temp_c"]?.toDouble(),
-        tempF: json["temp_f"]?.toDouble(),
+        tempC: json["temp_c"]?.toDouble() ?? 0.0,
+        tempF: json["temp_f"]?.toDouble() ?? 0.0,
         isDay: json["is_day"],
         condition: Condition.fromJson(json["condition"]),
-        windMph: json["wind_mph"]?.toDouble(),
-        windKph: json["wind_kph"]?.toDouble(),
-        windDegree: json["wind_degree"],
+        windMph: json["wind_mph"]?.toDouble() ?? 0.0,
+        windKph: json["wind_kph"]?.toDouble() ?? 0.0,
+        windDegree: json["wind_degree"]?.toInt() ?? 0,
         windDir: json["wind_dir"],
-        pressureMb: json["pressure_mb"],
-        pressureIn: json["pressure_in"]?.toDouble(),
-        precipMm: json["precip_mm"],
-        precipIn: json["precip_in"],
-        humidity: json["humidity"],
-        cloud: json["cloud"],
-        feelslikeC: json["feelslike_c"]?.toDouble(),
-        feelslikeF: json["feelslike_f"]?.toDouble(),
-        windchillC: json["windchill_c"]?.toDouble(),
-        windchillF: json["windchill_f"]?.toDouble(),
-        heatindexC: json["heatindex_c"]?.toDouble(),
-        heatindexF: json["heatindex_f"]?.toDouble(),
-        dewpointC: json["dewpoint_c"]?.toDouble(),
-        dewpointF: json["dewpoint_f"]?.toDouble(),
-        visKm: json["vis_km"],
-        visMiles: json["vis_miles"],
-        uv: json["uv"],
-        gustMph: json["gust_mph"]?.toDouble(),
-        gustKph: json["gust_kph"]?.toDouble(),
+        pressureMb: json["pressure_mb"]?.toDouble() ?? 0.0,
+        pressureIn: json["pressure_in"]?.toDouble() ?? 0.0,
+        precipMm: json["precip_mm"]?.toDouble() ?? 0.0,
+        precipIn: json["precip_in"]?.toDouble() ?? 0.0,
+        humidity: json["humidity"]?.toInt() ?? 0,
+        cloud: json["cloud"]?.toInt() ?? 0,
+        feelslikeC: json["feelslike_c"]?.toDouble() ?? 0.0,
+        feelslikeF: json["feelslike_f"]?.toDouble() ?? 0.0,
+        windchillC: json["windchill_c"]?.toDouble() ?? 0.0,
+        windchillF: json["windchill_f"]?.toDouble() ?? 0.0,
+        heatindexC: json["heatindex_c"]?.toDouble() ?? 0.0,
+        heatindexF: json["heatindex_f"]?.toDouble() ?? 0.0,
+        dewpointC: json["dewpoint_c"]?.toDouble() ?? 0.0,
+        dewpointF: json["dewpoint_f"]?.toDouble() ?? 0.0,
+        visKm: json["vis_km"]?.toDouble() ?? 0.0,
+        visMiles: json["vis_miles"]?.toDouble() ?? 0.0,
+        uv: json["uv"]?.toInt() ?? 0,
+        gustMph: json["gust_mph"]?.toDouble() ?? 0.0,
+        gustKph: json["gust_kph"]?.toDouble() ?? 0.0,
       );
 
   Map<String, dynamic> toJson() => {
@@ -206,8 +202,8 @@ class Location {
         name: json["name"],
         region: json["region"],
         country: json["country"],
-        lat: json["lat"]?.toDouble(),
-        lon: json["lon"]?.toDouble(),
+        lat: json["lat"]?.toDouble() ?? 0.0,
+        lon: json["lon"]?.toDouble() ?? 0.0,
         tzId: json["tz_id"],
         localtimeEpoch: json["localtime_epoch"],
         localtime: json["localtime"],
