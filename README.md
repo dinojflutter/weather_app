@@ -1,16 +1,25 @@
-# weather_app
+# Weather App
 
-A new Flutter project.
+This is a Weather App built with Flutter that fetches weather data based on the user's current location and user-entered country names. It uses the `geolocator` package to get the user's current location and `SharedPreferences` to persist the last entered country name across app restarts.
+
+## Features
+
+- Fetch weather data based on geolocation.
+- Fetch weather data based on user-entered country names.
+- Persist the last entered country name using `SharedPreferences`.
+- Display weather information including temperature, condition, and location.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Prerequisites
 
-A few resources to get you started if this is your first Flutter project:
+- Flutter SDK
+- Dart SDK
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Installation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Clone the repository:
+
+```sh
+git clone https://github.com/yourusername/weather_app.git
+
