@@ -22,4 +22,4 @@ This is a Weather App built with Flutter that fetches weather data based on the 
 
 ```sh
 git clone https://github.com/yourusername/weather_app.git
-cd weather_app
+
