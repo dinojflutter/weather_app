@@ -30,7 +30,10 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: MyColor.primarycolor,
-        title: const Text("Weather App"),
+        title: const Text(
+          "Weather App",
+          style: TextStyle(color: Colors.white),
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -62,12 +65,20 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          ElevatedButton(
-            onPressed: () {
+          PrimaryButton(
+            title: "Save Country",
+            txtcolors: Colors.white,
+            onpressed: () {
               homeviewmodel.fetchWeather();
             },
-            child: const Text("Save Country"),
+            btmcolors: Colors.purple,
           ),
+          // ElevatedButton(
+          //   onPressed: () {
+          //     homeviewmodel.fetchWeather();
+          //   },
+          //   child: const Text("Save Country"),
+          // ),
           const SizedBox(height: 50),
           BlocBuilder<VelocityBloc<WeatherModel?>,
               VelocityState<WeatherModel?>>(
@@ -80,10 +91,20 @@ class _HomePageState extends State<HomePage> {
               } else if (state is VelocityUpdateState) {
                 return Column(
                   children: [
-                    MainText(
-                      text: "Location: ${state.data!.location.country}",
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MainText(
+                          text: state.data!.location.country,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        MainText(
+                          text: ": ${state.data!.location.name}",
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ],
                     ),
                     MainText(
                       text: "Temperature: ${state.data!.current.tempC} °C",

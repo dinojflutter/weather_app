@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/constant/my_color.dart';
 
+import '../common_widget/primary_button.dart';
 import 'home/home_import.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -27,42 +28,38 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Container(
           decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/1.jpg"), fit: BoxFit.cover)),
+                  image: AssetImage("assets/2.jpg"), fit: BoxFit.cover)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(
                 height: 100,
               ),
-              Center(
+              const Center(
                 child: Text(
-                  "We Show \nWeather For You !",
+                  "We Show \nWeather For You ",
                   style: TextStyle(
-                      fontSize: 30,
-                      color: MyColor.primarycolor,
+                      fontSize: 40,
+                      color: Colors.white,
                       fontWeight: FontWeight.bold),
                 ),
               ),
               const Spacer(),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      fixedSize: Size.fromWidth(
-                          MediaQuery.of(context).size.width - 200),
-                      backgroundColor: MyColor.primarycolor),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomePage(),
-                        ));
-                  },
-                  child: const Text(
-                    "Skip",
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  )),
+              PrimaryButton(
+                title: "Skip",
+                txtcolors: MyColor.primarycolor,
+                onpressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const HomePage(),
+                    ),
+                  );
+                },
+                btmcolors: Colors.white,
+              ),
               const SizedBox(
                 height: 80,
-              )
+              ),
             ],
           ),
         ),
