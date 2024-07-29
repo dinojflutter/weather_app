@@ -7,25 +7,40 @@ class HomeViewModel {
   final VelocityBloc<WeatherModel?> weatherbloc =
       VelocityBloc<WeatherModel?>(null);
   final TextEditingController _controller = TextEditingController();
-  final _formkey = GlobalKey<FormState>();
 
   Future<void> fetchWeather() async {
     WeatherModel? data;
     try {
       var country = _controller.text;
       if (country.isEmpty) {
-        final position = await determinePosition();
-        data = await repository.weatherrepo.getWeatherDataByCoords(
-            latitude: position.latitude, longitude: position.longitude);
-        weatherbloc.onUpdateData(data);
+        final savedCountry = await getSavedCountryName();
+        if (savedCountry != null && savedCountry.isNotEmpty) {
+          data = await repository.weatherrepo
+              .getWeatherData(country: savedCountry);
+        } else {
+          final position = await determinePosition();
+          data = await repository.weatherrepo.getWeatherDataByCoords(
+              latitude: position.latitude, longitude: position.longitude);
+        }
       } else {
+        await saveCountryName(country);
         data = await repository.weatherrepo.getWeatherData(country: country);
-        weatherbloc.onUpdateData(data);
       }
+      weatherbloc.onUpdateData(data);
     } catch (e) {
       weatherbloc.onFailedResponse(
-          error: "Please enter the correct country Name");
+          error: "Please enter the correct country name");
     }
+  }
+
+  Future<void> saveCountryName(String country) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('country_name', country);
+  }
+
+  Future<String?> getSavedCountryName() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('country_name');
   }
 
   Future<Position> determinePosition() async {

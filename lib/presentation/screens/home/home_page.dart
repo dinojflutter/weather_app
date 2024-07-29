@@ -12,9 +12,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    super.initState();
     homeviewmodel = HomeViewModel(repository: context.read<Repository>());
     homeviewmodel.fetchWeather();
-    super.initState();
   }
 
   @override
@@ -52,22 +52,13 @@ class _HomePageState extends State<HomePage> {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Form(
-              key: homeviewmodel._formkey,
-              child: TextFormField(
-                controller: homeviewmodel._controller,
-                decoration: InputDecoration(
-                  hintText: "Enter Country",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(18),
-                  ),
+            child: TextField(
+              controller: homeviewmodel._controller,
+              decoration: InputDecoration(
+                hintText: "Enter Country",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(18),
                 ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Enter country Name";
-                  }
-                  return null;
-                },
               ),
             ),
           ),
